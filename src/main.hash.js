@@ -23,7 +23,7 @@ document.body.addEventListener("click", (e) => {
     e.preventDefault();
 
     const pathname = linkElement.href.replace(location.origin, "");
-    HashRouter.navigate(pathname);
+    hashRouter.navigate(pathname);
   }
 });
 
@@ -49,7 +49,7 @@ document.body.addEventListener("submit", (e) => {
       localStorage.setItem("user", JSON.stringify(store.user));
 
       store.isLoggedIn = true;
-      HashRouter.navigate("/");
+      hashRouter.navigate("/");
     }
 
     if (location.pathname === "/profile") {
@@ -68,7 +68,7 @@ document.body.addEventListener("submit", (e) => {
 
       localStorage.setItem("user", JSON.stringify(store.user));
 
-      HashRouter.navigate("/profile");
+      hashRouter.navigate("/profile");
     }
   }
 });
