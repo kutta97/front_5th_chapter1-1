@@ -1,6 +1,6 @@
 const store = {
-  isLoggedIn: false,
-  user: {
+  isLoggedIn: Boolean(localStorage.getItem("user")),
+  user: localStorage.getItem("user") ?? {
     username: "",
     email: "",
     bio: "",
