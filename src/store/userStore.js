@@ -11,7 +11,7 @@ class UserStore extends Store {
 }
 
 const userStore = new UserStore({
-  user: localStorage.getItem("user"),
+  user: JSON.parse(localStorage.getItem("user")),
 });
 
 export default userStore;
