@@ -5,12 +5,22 @@ import MainPage from "./pages/MainPage.js";
 import ErrorPage from "./pages/ErrorPage.js";
 import Router from "./router/router.js";
 
-document.addEventListener("click", (e) => {
+document.body.addEventListener("click", (e) => {
   if (e.target.id === "logout" || e.target.closest("#logout")) {
     e.preventDefault();
 
     store.isLoggedIn = false;
     localStorage.removeItem("user");
+
+    return;
+  }
+
+  const linkElement = e.target.closest("a");
+  if (linkElement) {
+    e.preventDefault();
+
+    const pathname = linkElement.href.replace(location.origin, "");
+    Router.navigate(pathname);
   }
 });
 
