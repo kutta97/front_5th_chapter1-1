@@ -13,6 +13,8 @@ document.body.addEventListener("click", (e) => {
     store.isLoggedIn = false;
     localStorage.removeItem("user");
 
+    historyRouter.navigate({ to: "/login" });
+
     return;
   }
 
