@@ -239,7 +239,6 @@ const ProfilePage = () => `
 
 const navigateTo = (path) => {
   window.history.replaceState({}, "", path);
-  render();
 };
 
 const App = () => {
@@ -249,6 +248,8 @@ const App = () => {
   if (location.pathname === "/profile") {
     if (!state.isLoggedIn) {
       navigateTo("/login");
+
+      return LoginPage();
     }
 
     return ProfilePage();
