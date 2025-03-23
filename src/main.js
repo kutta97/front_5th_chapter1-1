@@ -9,7 +9,7 @@ const Nav = ({ isLoggedIn }) => `
       ${isLoggedIn ? `<li><a href="/profile" className="text-gray-600">프로필</a></li>` : ""}
       ${
         isLoggedIn
-          ? `<li><a href="#" className="text-gray-600">로그아웃</a></li>`
+          ? `<li><a href="#" id="logout" className="text-gray-600">로그아웃</a></li>`
           : `<li><a href="/login" className="text-gray-600">로그인</a></li>`
       }
     </ul>
