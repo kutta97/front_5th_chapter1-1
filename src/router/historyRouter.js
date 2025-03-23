@@ -1,6 +1,6 @@
 import Renderer from "../utils/renderer.js";
 
-const Router = (function () {
+const HistoryRouter = (function () {
   const routes = {};
 
   function addRoute(path, component) {
@@ -43,4 +43,4 @@ const Router = (function () {
   };
 })();
 
-export default Router;
+export default HistoryRouter;

@@ -3,7 +3,7 @@ import LoginPage from "./pages/LoginPage.js";
 import ProfilePage from "./pages/ProfilePage.js";
 import MainPage from "./pages/MainPage.js";
 import ErrorPage from "./pages/ErrorPage.js";
-import Router from "./router/router.js";
+import HistoryRouter from "./router/historyRouter.js";
 
 document.body.addEventListener("click", (e) => {
   if (e.target.id === "logout" || e.target.closest("#logout")) {
@@ -20,7 +20,7 @@ document.body.addEventListener("click", (e) => {
     e.preventDefault();
 
     const pathname = linkElement.href.replace(location.origin, "");
-    Router.navigate(pathname);
+    HistoryRouter.navigate(pathname);
   }
 });
 
@@ -46,7 +46,7 @@ document.body.addEventListener("submit", (e) => {
       localStorage.setItem("user", JSON.stringify(store.user));
 
       store.isLoggedIn = true;
-      Router.navigate("/");
+      HistoryRouter.navigate("/");
     }
 
     if (location.pathname === "/profile") {
@@ -65,25 +65,25 @@ document.body.addEventListener("submit", (e) => {
 
       localStorage.setItem("user", JSON.stringify(store.user));
 
-      Router.navigate("/profile");
+      HistoryRouter.navigate("/profile");
     }
   }
 });
 
-Router.addRoute("/", MainPage);
-Router.addRoute("/profile", () => {
+HistoryRouter.addRoute("/", MainPage);
+HistoryRouter.addRoute("/profile", () => {
   if (!store.isLoggedIn) {
-    return Router.redirect("/login");
+    return HistoryRouter.redirect("/login");
   }
 
   return ProfilePage({ user: store.user });
 });
-Router.addRoute("/login", () => {
+HistoryRouter.addRoute("/login", () => {
   if (store.isLoggedIn) {
-    return Router.redirect("/");
+    return HistoryRouter.redirect("/");
   }
 
   return LoginPage();
 });
-Router.addRoute("/*", ErrorPage);
-Router.init();
+HistoryRouter.addRoute("/*", ErrorPage);
+HistoryRouter.init();
