@@ -7,22 +7,23 @@ const Router = (function () {
     routes[path] = component;
   }
 
+  function render(path) {
+    const component = (routes[path] ?? routes["/*"])();
+    Renderer.render({ component });
+
+    return component;
+  }
+
   function navigate(path) {
     window.history.pushState({}, "", path);
 
-    const component = routes[path] ?? routes["/*"];
-    Renderer.render({ component });
-
-    return component();
+    return render(path);
   }
 
   function redirect(path) {
     window.history.replaceState({}, "", path);
 
-    const component = routes[path] ?? routes["/*"];
-    Renderer.render({ component });
-
-    return component();
+    return render(path);
   }
 
   function init() {
