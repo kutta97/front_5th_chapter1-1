@@ -1,24 +1,39 @@
 import userStore from "../store/userStore.js";
 
+const navigations = [
+  { href: "/", label: "홈", id: "home" },
+  { href: "/profile", label: "프로필", id: "profile" },
+  { href: "/login", label: "로그인", id: "login" },
+  { href: "#", label: "로그아웃", id: "logout" },
+];
+
+const isVisibleLink = ({ id, isLoggedIn }) => {
+  if (id === "home") return true;
+  if (id === "profile") return isLoggedIn;
+  if (id === "login") return !isLoggedIn;
+  if (id === "logout") return isLoggedIn;
+
+  return false;
+};
+
 const Nav = ({ isLoggedIn, currentPathname }) => `
   <nav class="bg-white shadow-md p-2 sticky top-14">
     <ul class="flex justify-around">
-      <li>
-        <a href="/" class="${currentPathname === "/" ? "text-blue-600 font-bold" : "text-gray-600"}">홈</a>
-      </li>
-      ${
-        isLoggedIn
-          ? `
-            <li>
-              <a href="/profile" class="${currentPathname === "/profile" ? "text-blue-600 font-bold" : "text-gray-600"}">프로필</a>
-            </li>`
-          : ""
-      }
-      ${
-        isLoggedIn
-          ? `<li><a href="#" id="logout" class="text-gray-600">로그아웃</a></li>`
-          : `<li><a href="/login" class="text-gray-600">로그인</a></li>`
-      }
+      ${navigations
+        .filter(({ id }) => isVisibleLink({ id, isLoggedIn }))
+        .map(
+          ({ href, label, id }) => `
+            <li>  
+              <a
+                id="${id}"
+                href="${href}"
+                class="${currentPathname === href ? "text-blue-600 font-bold" : "text-gray-600"}">
+                ${label}
+              </a>
+            </li>
+          `,
+        )
+        .join("")}
     </ul>
   </nav>
 `;
