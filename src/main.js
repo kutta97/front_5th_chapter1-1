@@ -25,27 +25,48 @@ document.body.addEventListener("click", (e) => {
 });
 
 document.body.addEventListener("submit", (e) => {
-  if (e.target.closest("form") && location.pathname === "/login") {
-    e.preventDefault();
+  e.preventDefault();
 
-    const form = e.target;
-    const username = form.querySelector("input[name='username']").value;
-    const email = form.querySelector("input[name='email']").value;
+  if (e.target.closest("form")) {
+    if (location.pathname === "/login") {
+      const form = e.target;
+      const username = form.querySelector("input[name='username']").value;
+      const email = form.querySelector("input[name='email']").value;
 
-    if (!username) {
-      return;
+      if (!username) {
+        return;
+      }
+
+      store.user = {
+        username: username,
+        email: email,
+        bio: "",
+      };
+
+      localStorage.setItem("user", JSON.stringify(store.user));
+
+      store.isLoggedIn = true;
+      Router.navigate("/");
     }
 
-    store.user = {
-      username: username,
-      email: email,
-      bio: "",
-    };
+    if (location.pathname === "/profile") {
+      const form = e.target;
+      const username = form.querySelector("#username").value;
+      const email = form.querySelector("#email").value;
+      const bio = form.querySelector("#bio").value;
 
-    localStorage.setItem("user", JSON.stringify(store.user));
+      console.log(form, username, email, bio);
 
-    store.isLoggedIn = true;
-    Router.navigate("/");
+      store.user = {
+        username: username,
+        email: email,
+        bio: bio,
+      };
+
+      localStorage.setItem("user", JSON.stringify(store.user));
+
+      Router.navigate("/profile");
+    }
   }
 });
 
