@@ -2,8 +2,7 @@ import Router from "./router.js";
 
 class HistoryRouter extends Router {
   init() {
-    window.addEventListener("popstate", (e) => {
-      e.preventDefault();
+    window.addEventListener("popstate", () => {
       this.navigate({ to: window.location.pathname });
     });
 
