@@ -1,3 +1,5 @@
+import Renderer from "../utils/renderer.js";
+
 const Router = (function () {
   const routes = {};
 
@@ -9,7 +11,7 @@ const Router = (function () {
     window.history.pushState({}, "", path);
 
     const component = routes[path] ?? routes["/*"];
-    document.getElementById("root").innerHTML = component();
+    Renderer.render({ component });
 
     return component();
   }
@@ -18,7 +20,7 @@ const Router = (function () {
     window.history.replaceState({}, "", path);
 
     const component = routes[path] ?? routes["/*"];
-    document.getElementById("root").innerHTML = component();
+    Renderer.render({ component });
 
     return component();
   }
