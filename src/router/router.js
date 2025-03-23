@@ -6,6 +6,8 @@ const Router = (function () {
   }
 
   function navigate(path) {
+    window.history.pushState({}, "", path);
+
     const component = routes[path] ?? routes["/*"];
     document.getElementById("root").innerHTML = component();
 
@@ -14,7 +16,11 @@ const Router = (function () {
 
   function redirect(path) {
     window.history.replaceState({}, "", path);
-    return navigate(path);
+
+    const component = routes[path] ?? routes["/*"];
+    document.getElementById("root").innerHTML = component();
+
+    return component();
   }
 
   function init() {
