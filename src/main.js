@@ -185,9 +185,6 @@ document.body.addEventListener("submit", (e) => {
     const form = e.target;
     const username = form.querySelector("input[name='username']").value;
     const email = form.querySelector("input[name='email']").value;
-    const password = form.querySelector("input[name='password']").value;
-
-    console.log(form);
 
     if (!username) {
       return;
@@ -198,7 +195,7 @@ document.body.addEventListener("submit", (e) => {
       JSON.stringify({
         username: username,
         email: email,
-        bio: password,
+        bio: "",
       }),
     );
 
