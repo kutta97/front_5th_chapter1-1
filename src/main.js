@@ -36,14 +36,13 @@ document.body.addEventListener("submit", (e) => {
       return;
     }
 
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        username: username,
-        email: email,
-        bio: "",
-      }),
-    );
+    store.user = {
+      username: username,
+      email: email,
+      bio: "",
+    };
+
+    localStorage.setItem("user", JSON.stringify(store.user));
 
     store.isLoggedIn = true;
     Router.navigate("/");
@@ -56,7 +55,7 @@ Router.addRoute("/profile", () => {
     return Router.redirect("/login");
   }
 
-  return ProfilePage();
+  return ProfilePage({ user: store.user });
 });
 Router.addRoute("/login", LoginPage);
 Router.addRoute("/*", ErrorPage);
