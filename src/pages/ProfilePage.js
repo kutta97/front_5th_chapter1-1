@@ -1,7 +1,8 @@
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
+import store from "../store/store.js";
 
-const ProfilePage = ({ user }) => `
+const ProfilePage = () => `
   <div id="root">
     <div class="bg-gray-100 min-h-screen flex justify-center">
       <div class="max-w-md w-full">
@@ -22,7 +23,7 @@ const ProfilePage = ({ user }) => `
                   type="text"
                   id="username"
                   name="username"
-                  value="${user.username}"
+                  value="${store.user.username}"
                   class="w-full p-2 border rounded"
                 />
               </div>
@@ -36,7 +37,7 @@ const ProfilePage = ({ user }) => `
                   type="email"
                   id="email"
                   name="email"
-                  value="${user.email}"
+                  value="${store.user.email}"
                   class="w-full p-2 border rounded"
                 />
               </div>
@@ -51,7 +52,7 @@ const ProfilePage = ({ user }) => `
                   name="bio"
                   rows="4"
                   class="w-full p-2 border rounded"
-                >${user.bio}</textarea>
+                >${store.user.bio}</textarea>
               </div>
               <button
                 type="submit"

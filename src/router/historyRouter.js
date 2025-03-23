@@ -1,46 +1,22 @@
-import Renderer from "../utils/renderer.js";
+import Router from "./router.js";
 
-const HistoryRouter = (function () {
-  const routes = {};
-
-  function addRoute(path, component) {
-    routes[path] = component;
-  }
-
-  function render(path) {
-    const component = (routes[path] ?? routes["/*"])();
-    Renderer.render({ component });
-
-    return component;
-  }
-
-  function navigate(path) {
-    window.history.pushState({}, "", path);
-
-    return render(path);
-  }
-
-  function redirect(path) {
-    window.history.replaceState({}, "", path);
-
-    return render(path);
-  }
-
-  function init() {
+class HistoryRouter extends Router {
+  init() {
     window.addEventListener("popstate", (e) => {
       e.preventDefault();
-      navigate(window.location.pathname);
+      this.navigate({ to: window.location.pathname });
     });
 
-    navigate(window.location.pathname);
+    this.navigate({ to: window.location.pathname });
   }
 
-  return {
-    addRoute,
-    navigate,
-    redirect,
-    init,
-  };
-})();
+  push(path) {
+    window.history.pushState({}, "", path);
+  }
+
+  replace(path) {
+    window.history.replaceState({}, "", path);
+  }
+}
 
 export default HistoryRouter;

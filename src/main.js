@@ -4,6 +4,7 @@ import ProfilePage from "./pages/ProfilePage.js";
 import MainPage from "./pages/MainPage.js";
 import ErrorPage from "./pages/ErrorPage.js";
 import HistoryRouter from "./router/historyRouter.js";
+import authMiddleWare from "./middlewares/authMiddleware.js";
 
 document.body.addEventListener("click", (e) => {
   if (e.target.id === "logout" || e.target.closest("#logout")) {
@@ -20,7 +21,7 @@ document.body.addEventListener("click", (e) => {
     e.preventDefault();
 
     const pathname = linkElement.href.replace(location.origin, "");
-    HistoryRouter.navigate(pathname);
+    historyRouter.navigate({ to: pathname });
   }
 });
 
@@ -46,7 +47,7 @@ document.body.addEventListener("submit", (e) => {
       localStorage.setItem("user", JSON.stringify(store.user));
 
       store.isLoggedIn = true;
-      HistoryRouter.navigate("/");
+      historyRouter.navigate({ to: "/" });
     }
 
     if (location.pathname === "/profile") {
@@ -65,25 +66,17 @@ document.body.addEventListener("submit", (e) => {
 
       localStorage.setItem("user", JSON.stringify(store.user));
 
-      HistoryRouter.navigate("/profile");
+      historyRouter.navigate({ to: "/profile" });
     }
   }
 });
 
-HistoryRouter.addRoute("/", MainPage);
-HistoryRouter.addRoute("/profile", () => {
-  if (!store.isLoggedIn) {
-    return HistoryRouter.redirect("/login");
-  }
+const routes = [
+  { path: "/", component: MainPage },
+  { path: "/profile", component: ProfilePage, meta: { requiresAuth: true } },
+  { path: "/login", component: LoginPage, meta: { guestOnly: true } },
+  { path: "/*", component: ErrorPage },
+];
 
-  return ProfilePage({ user: store.user });
-});
-HistoryRouter.addRoute("/login", () => {
-  if (store.isLoggedIn) {
-    return HistoryRouter.redirect("/");
-  }
-
-  return LoginPage();
-});
-HistoryRouter.addRoute("/*", ErrorPage);
-HistoryRouter.init();
+const historyRouter = new HistoryRouter(routes);
+historyRouter.use(authMiddleWare(store)).init();
