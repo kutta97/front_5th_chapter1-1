@@ -2,12 +2,12 @@ const authMiddleware = (store) => {
   return function (context) {
     const { meta } = context;
 
-    if (meta?.requiresAuth && !store.isLoggedIn) {
+    if (meta?.requiresAuth && !store.isLoggedIn()) {
       context.redirect = "/login";
       return false;
     }
 
-    if (meta?.guestOnly && store.isLoggedIn) {
+    if (meta?.guestOnly && store.isLoggedIn()) {
       context.redirect = "/";
       return false;
     }

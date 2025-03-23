@@ -1,4 +1,4 @@
-import store from "../store/store.js";
+import userStore from "../store/userStore.js";
 
 const Nav = ({ isLoggedIn, currentPathname }) => `
   <nav class="bg-white shadow-md p-2 sticky top-14">
@@ -27,7 +27,7 @@ const Header = () => `
   <header class="bg-blue-600 text-white p-4 sticky top-0">
     <h1 class="text-2xl font-bold">항해플러스</h1>
   </header>
-  ${Nav({ isLoggedIn: store.isLoggedIn, currentPathname: location.pathname })}
+  ${Nav({ isLoggedIn: userStore.isLoggedIn(), currentPathname: location.pathname })}
 `;
 
 export default Header;

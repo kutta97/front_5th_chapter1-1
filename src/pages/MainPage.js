@@ -1,6 +1,6 @@
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
-import store from "../store/store.js";
+import userStore from "../store/userStore.js";
 import { useRouter } from "../router/routes.js";
 
 const MainPage = () => `
@@ -105,7 +105,7 @@ document.body.addEventListener("click", (e) => {
   if (e.target.id === "logout" || e.target.closest("#logout")) {
     e.preventDefault();
 
-    store.isLoggedIn = false;
+    userStore.setState({ user: null });
     localStorage.removeItem("user");
 
     const router = useRouter();

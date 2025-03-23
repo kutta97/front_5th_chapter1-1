@@ -1,4 +1,4 @@
-import store from "../store/store.js";
+import userStore from "../store/userStore.js";
 import HistoryRouter from "./historyRouter.js";
 import HashRouter from "./hashRouter.js";
 import authMiddleWare from "../middlewares/authMiddleware.js";
@@ -28,7 +28,7 @@ const createRouter = ({ type = "history" }) => {
   }
 
   currentRouter = new Router[type](routes);
-  currentRouter.use(authMiddleWare(store)).init();
+  currentRouter.use(authMiddleWare(userStore)).init();
 
   return currentRouter;
 };

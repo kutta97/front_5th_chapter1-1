@@ -1,4 +1,4 @@
-import store from "../store/store.js";
+import userStore from "../store/userStore.js";
 import { useRouter } from "../router/routes.js";
 
 const LoginPage = () => `
@@ -40,15 +40,14 @@ document.body.addEventListener("submit", (e) => {
       return;
     }
 
-    store.user = {
+    const user = {
       username: username,
       email: email,
       bio: "",
     };
 
-    localStorage.setItem("user", JSON.stringify(store.user));
-
-    store.isLoggedIn = true;
+    userStore.setState({ user });
+    localStorage.setItem("user", JSON.stringify(user));
 
     const router = useRouter();
     router.navigate({ to: "/" });
