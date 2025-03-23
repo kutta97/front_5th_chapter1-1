@@ -22,7 +22,7 @@ const ProfilePage = ({ user }) => `
                   type="text"
                   id="username"
                   name="username"
-                  value=${user.username}
+                  value="${user.username}"
                   class="w-full p-2 border rounded"
                 />
               </div>
@@ -36,7 +36,7 @@ const ProfilePage = ({ user }) => `
                   type="email"
                   id="email"
                   name="email"
-                  value=${user.email}
+                  value="${user.email}"
                   class="w-full p-2 border rounded"
                 />
               </div>
