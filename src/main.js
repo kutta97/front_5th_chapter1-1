@@ -149,10 +149,10 @@ const LoginPage = () => `
           <input id="username" name="username" type="text" placeholder="사용자 이름" class="w-full p-2 border rounded">
         </div>
         <div class="mb-4">
-          <input type="text" placeholder="이메일 또는 전화번호" class="w-full p-2 border rounded">
+          <input name="email" type="text" placeholder="이메일 또는 전화번호" class="w-full p-2 border rounded">
         </div>
         <div class="mb-6">
-          <input type="password" placeholder="비밀번호" class="w-full p-2 border rounded">
+          <input name="password" type="password" placeholder="비밀번호" class="w-full p-2 border rounded">
         </div>
         <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded font-bold">로그인</button>
       </form>
@@ -166,6 +166,36 @@ const LoginPage = () => `
     </div>
   </main>
 `;
+
+document.body.addEventListener("submit", (e) => {
+  if (e.target.closest("form") && location.pathname === "/login") {
+    e.preventDefault();
+
+    const form = e.target;
+    const username = form.querySelector("input[name='username']").value;
+    const email = form.querySelector("input[name='email']").value;
+    const password = form.querySelector("input[name='password']").value;
+
+    console.log(form);
+
+    if (!username) {
+      return;
+    }
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        username: username,
+        email: email,
+        bio: password,
+      }),
+    );
+
+    state.isLoggedIn = true;
+    navigateTo("/");
+    render();
+  }
+});
 
 const ProfilePage = () => `
   <div id="root">
