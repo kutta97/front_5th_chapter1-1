@@ -1,6 +1,7 @@
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import store from "../store/store.js";
+import { useRouter } from "../router/routes.js";
 
 const ProfilePage = () => `
   <div id="root">
@@ -68,5 +69,29 @@ const ProfilePage = () => `
     </div>
   </div>
 `;
+
+document.body.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (e.target.closest("form") && location.pathname === "/profile") {
+    const form = e.target;
+    const username = form.querySelector("#username").value;
+    const email = form.querySelector("#email").value;
+    const bio = form.querySelector("#bio").value;
+
+    console.log(form, username, email, bio);
+
+    store.user = {
+      username: username,
+      email: email,
+      bio: bio,
+    };
+
+    localStorage.setItem("user", JSON.stringify(store.user));
+
+    const router = useRouter();
+    router.navigate({ to: "/profile" });
+  }
+});
 
 export default ProfilePage;

@@ -1,5 +1,7 @@
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
+import store from "../store/store.js";
+import { useRouter } from "../router/routes.js";
 
 const MainPage = () => `
   <div class="bg-gray-100 min-h-screen flex justify-center">
@@ -98,5 +100,29 @@ const MainPage = () => `
     </div>
   </div>
 `;
+
+document.body.addEventListener("click", (e) => {
+  if (e.target.id === "logout" || e.target.closest("#logout")) {
+    e.preventDefault();
+
+    store.isLoggedIn = false;
+    localStorage.removeItem("user");
+
+    const router = useRouter();
+    router.navigate({ to: "/login" });
+
+    return;
+  }
+
+  const linkElement = e.target.closest("a");
+  if (linkElement) {
+    e.preventDefault();
+
+    const pathname = linkElement.href.replace(location.origin, "");
+
+    const router = useRouter();
+    router.navigate({ to: pathname });
+  }
+});
 
 export default MainPage;

@@ -1,3 +1,6 @@
+import store from "../store/store.js";
+import { useRouter } from "../router/routes.js";
+
 const LoginPage = () => `
   <main class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -24,5 +27,32 @@ const LoginPage = () => `
     </div>
   </main>
 `;
+
+document.body.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (e.target.closest("form") && location.pathname === "/login") {
+    const form = e.target;
+    const username = form.querySelector("input[name='username']").value;
+    const email = form.querySelector("input[name='email']").value;
+
+    if (!username) {
+      return;
+    }
+
+    store.user = {
+      username: username,
+      email: email,
+      bio: "",
+    };
+
+    localStorage.setItem("user", JSON.stringify(store.user));
+
+    store.isLoggedIn = true;
+
+    const router = useRouter();
+    router.navigate({ to: "/" });
+  }
+});
 
 export default LoginPage;
