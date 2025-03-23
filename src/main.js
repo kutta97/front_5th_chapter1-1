@@ -78,6 +78,12 @@ Router.addRoute("/profile", () => {
 
   return ProfilePage({ user: store.user });
 });
-Router.addRoute("/login", LoginPage);
+Router.addRoute("/login", () => {
+  if (store.isLoggedIn) {
+    return Router.redirect("/");
+  }
+
+  return LoginPage();
+});
 Router.addRoute("/*", ErrorPage);
 Router.init();
