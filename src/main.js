@@ -3,6 +3,7 @@ import LoginPage from "./pages/LoginPage.js";
 import ProfilePage from "./pages/ProfilePage.js";
 import MainPage from "./pages/MainPage.js";
 import ErrorPage from "./pages/ErrorPage.js";
+import Router from "./router/router.js";
 
 document.addEventListener("click", (e) => {
   if (e.target.id === "logout" || e.target.closest("#logout")) {
@@ -10,8 +11,6 @@ document.addEventListener("click", (e) => {
 
     store.isLoggedIn = false;
     localStorage.removeItem("user");
-
-    render();
   }
 });
 
@@ -37,44 +36,18 @@ document.body.addEventListener("submit", (e) => {
     );
 
     store.isLoggedIn = true;
-    navigateTo("/");
-    render();
+    Router.navigate("/");
   }
 });
 
-const navigateTo = (path) => {
-  window.history.replaceState({}, "", path);
-};
-
-const App = () => {
-  if (location.pathname === "/login") {
-    return LoginPage();
-  }
-  if (location.pathname === "/profile") {
-    console.log("isLoggedIn", store.isLoggedIn);
-    if (!store.isLoggedIn) {
-      navigateTo("/login");
-
-      return LoginPage();
-    }
-
-    return ProfilePage();
-  }
-  if (location.pathname === "/") {
-    return MainPage();
+Router.addRoute("/", MainPage);
+Router.addRoute("/profile", () => {
+  if (!store.isLoggedIn) {
+    return Router.redirect("/login");
   }
 
-  return ErrorPage();
-};
-
-const render = () => {
-  console.trace("render", store.isLoggedIn);
-  document.body.innerHTML = App();
-};
-
-window.addEventListener("popstate", (e) => {
-  e.preventDefault();
-  render();
+  return ProfilePage();
 });
-
-render();
+Router.addRoute("/login", LoginPage);
+Router.addRoute("/*", ErrorPage);
+Router.init();
