@@ -1,3 +1,7 @@
+const state = {
+  isLoggedIn: false,
+};
+
 const MainPage = () => `
   <div class="bg-gray-100 min-h-screen flex justify-center">
     <div class="max-w-md w-full">
@@ -233,11 +237,20 @@ const ProfilePage = () => `
   </div>
 `;
 
+const navigateTo = (path) => {
+  window.history.replaceState({}, "", path);
+  render();
+};
+
 const App = () => {
   if (location.pathname === "/login") {
     return LoginPage();
   }
   if (location.pathname === "/profile") {
+    if (!state.isLoggedIn) {
+      navigateTo("/login");
+    }
+
     return ProfilePage();
   }
   if (location.pathname === "/") {
