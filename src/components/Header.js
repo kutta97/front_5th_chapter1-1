@@ -1,4 +1,4 @@
-import userStore from "../store/userStore.js";
+import userStore from "../stores/userStore.js";
 
 const navigations = [
   { href: "/", label: "홈", id: "home" },

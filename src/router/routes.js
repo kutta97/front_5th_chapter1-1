@@ -1,4 +1,4 @@
-import userStore from "../store/userStore.js";
+import userStore from "../stores/userStore.js";
 import HistoryRouter from "./historyRouter.js";
 import HashRouter from "./hashRouter.js";
 import authMiddleWare from "../middlewares/authMiddleware.js";

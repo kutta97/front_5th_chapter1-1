@@ -1,6 +1,6 @@
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
-import userStore from "../store/userStore.js";
+import userStore from "../stores/userStore.js";
 import { useRouter } from "../router/routes.js";
 
 const ProfilePage = () => {

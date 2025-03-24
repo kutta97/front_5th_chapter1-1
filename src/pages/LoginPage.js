@@ -1,4 +1,4 @@
-import userStore from "../store/userStore.js";
+import userStore from "../stores/userStore.js";
 import { useRouter } from "../router/routes.js";
 
 const LoginPage = () => `
