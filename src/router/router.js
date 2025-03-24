@@ -1,12 +1,11 @@
 import Renderer from "../utils/renderer.js";
 
 class RouterInterface {
+  routes = {};
+  routesMeta = {};
+  middlewares = [];
+
   constructor(routes = []) {
-    this.routes = {};
-    this.routesMeta = {};
-
-    this.middlewares = [];
-
     routes.forEach(({ path, component, meta }) => {
       this.routes[path] = component;
       this.routesMeta[path] = meta;

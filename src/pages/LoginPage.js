@@ -31,7 +31,7 @@ const LoginPage = () => `
 document.body.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (e.target.closest("form") && location.pathname === "/login") {
+  if (e.target.closest("form") && location.pathname.endsWith("/login")) {
     const form = e.target;
     const username = form.querySelector("input[name='username']").value;
     const email = form.querySelector("input[name='email']").value;

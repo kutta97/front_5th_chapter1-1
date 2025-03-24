@@ -27,7 +27,7 @@ const Nav = ({ isLoggedIn, currentPathname }) => `
               <a
                 id="${id}"
                 href="${href}"
-                class="${currentPathname === href ? "text-blue-600 font-bold" : "text-gray-600"}">
+                class="${currentPathname.endsWith(href) ? "text-blue-600 font-bold" : "text-gray-600"}">
                 ${label}
               </a>
             </li>

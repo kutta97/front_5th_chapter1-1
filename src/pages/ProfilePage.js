@@ -77,7 +77,7 @@ const ProfilePage = () => {
 document.body.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (e.target.closest("form") && location.pathname === "/profile") {
+  if (e.target.closest("form") && location.pathname.endsWith("/profile")) {
     const form = e.target;
     const username = form.querySelector("#username").value;
     const email = form.querySelector("#email").value;
