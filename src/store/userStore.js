@@ -1,4 +1,4 @@
-import Store from "../utils/Store";
+import Store from "../utils/store.js";
 
 class UserStore extends Store {
   constructor(initialState) {
