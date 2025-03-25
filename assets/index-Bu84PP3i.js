@@ -22,7 +22,7 @@ var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configura
   <footer class="bg-gray-200 p-4 text-center">
     <p>&copy; 2024 항해플러스. All rights reserved.</p>
   </footer>
-`,A=[{name:"홍길동",createdAt:"5분 전",contents:"오늘 날씨가 정말 좋네요. 다들 좋은 하루 보내세요!"},{name:"김철수",createdAt:"15분 전",contents:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{name:"이영희",createdAt:"30분 전",contents:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{name:"박민수",createdAt:"1시간 전",contents:"주말에 등산 가실 분 계신가요? 함께 가요!"},{name:"정수연",createdAt:"2시간 전",contents:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}],R=()=>`
+`,j=[{name:"홍길동",createdAt:"5분 전",contents:"오늘 날씨가 정말 좋네요. 다들 좋은 하루 보내세요!"},{name:"김철수",createdAt:"15분 전",contents:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{name:"이영희",createdAt:"30분 전",contents:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{name:"박민수",createdAt:"1시간 전",contents:"주말에 등산 가실 분 계신가요? 함께 가요!"},{name:"정수연",createdAt:"2시간 전",contents:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}],A=()=>`
   <div class="bg-gray-100 min-h-screen flex justify-center">
     <div class="max-w-md w-full">
     ${p()}
@@ -33,7 +33,7 @@ var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configura
         </div>
 
         <div class="space-y-4">
-          ${A.map(({name:t,createdAt:e,contents:r})=>`
+          ${j.map(({name:t,createdAt:e,contents:r})=>`
               <div class="bg-white rounded-lg shadow p-4">
                 <div class="flex items-center mb-2">
                   <img src="https://placehold.co/40" alt="프로필" class="rounded-full mr-2">
@@ -49,13 +49,13 @@ var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configura
                   <button>공유</button>
                 </div>
               </div>
-            `)}
+            `).join("")}
         </div>
       </main>
       ${b()}
     </div>
   </div>
-`;document.body.addEventListener("click",t=>{if(t.target.id==="logout"||t.target.closest("#logout")){t.preventDefault(),i.setState({user:null}),localStorage.removeItem("user"),d().navigate({to:"/login"});return}const e=t.target.closest("a");if(e){t.preventDefault();const r=e.href.replace(location.origin,"");d().navigate({to:r})}});const j=()=>{const{user:t}=i.getState();return`
+`;document.body.addEventListener("click",t=>{if(t.target.id==="logout"||t.target.closest("#logout")){t.preventDefault(),i.setState({user:null}),localStorage.removeItem("user"),d().navigate({to:"/login"});return}const e=t.target.closest("a");if(e){t.preventDefault();const r=e.href.replace(location.origin,"");d().navigate({to:r})}});const R=()=>{const{user:t}=i.getState();return`
     <div id="root">
       <div class="bg-gray-100 min-h-screen flex justify-center">
         <div class="max-w-md w-full">
@@ -159,4 +159,4 @@ var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configura
       </a>
     </div>
   </main>
-`;let a=null;const N=[{path:"/",component:R},{path:"/profile",component:j,meta:{requiresAuth:!0}},{path:"/login",component:q,meta:{guestOnly:!0}},{path:"/*",component:M}],B={history:$,hash:L},D=({type:t="history"})=>a||(a=new B[t](N),a.use(P(i)).init(),a),d=()=>{if(!a)throw new Error("Router is not initialized");return a};D({type:"history"});
+`;let a=null;const N=[{path:"/",component:A},{path:"/profile",component:R,meta:{requiresAuth:!0}},{path:"/login",component:q,meta:{guestOnly:!0}},{path:"/*",component:M}],B={history:$,hash:L},D=({type:t="history"})=>a||(a=new B[t](N),a.use(P(i)).init(),a),d=()=>{if(!a)throw new Error("Router is not initialized");return a};D({type:"history"});
