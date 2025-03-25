@@ -60,7 +60,7 @@ const MainPage = () => `
                 </div>
               </div>
             `,
-          )}
+          ).join("")}
         </div>
       </main>
       ${Footer()}
