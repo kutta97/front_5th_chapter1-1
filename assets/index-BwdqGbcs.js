@@ -1,31 +1,31 @@
-var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configurable:!0,writable:!0,value:r}):t[e]=r;var c=(t,e,r)=>v(t,typeof e!="symbol"?e+"":e,r);(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))o(s);new MutationObserver(s=>{for(const n of s)if(n.type==="childList")for(const l of n.addedNodes)l.tagName==="LINK"&&l.rel==="modulepreload"&&o(l)}).observe(document,{childList:!0,subtree:!0});function r(s){const n={};return s.integrity&&(n.integrity=s.integrity),s.referrerPolicy&&(n.referrerPolicy=s.referrerPolicy),s.crossOrigin==="use-credentials"?n.credentials="include":s.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function o(s){if(s.ep)return;s.ep=!0;const n=r(s);fetch(s.href,n)}})();class w{constructor(){this.observers=new Set}subscribe(e){this.observers.add(e)}unsubscribe(e){this.observers.delete(e)}notify(e){this.observers.forEach(r=>r(e))}}class x extends w{constructor(e){super(),this.state=e}setState(e){this.state={...this.state,...e},this.notify(this.state)}getState(){return this.state}}class y extends x{constructor(e){super(e)}isLoggedIn(){return!!this.state.user}}const i=new y({user:JSON.parse(localStorage.getItem("user"))}),S=function(){function t({component:e}){document.getElementById("root").innerHTML=e}return{render:t}}();class h{constructor(e=[]){c(this,"routes",{});c(this,"routesMeta",{});c(this,"middlewares",[]);e.forEach(({path:r,component:o,meta:s})=>{this.routes[r]=o,this.routesMeta[r]=s})}use(e){return this.middlewares.push(e),this}render(e){const r=(this.routes[e]??this.routes["/*"])();return S.render({component:r}),r}push(){}replace(){}navigate({to:e,replace:r=!1}){const o={meta:this.routesMeta[e],redirect:null};for(const s of this.middlewares)if(s(o)===!1&&o.redirect)return this.replace(o.redirect),this.render(o.redirect);return r?this.replace(o.redirect):this.push(e),this.render(e)}}const u="front_5th_chapter1-1",m=t=>{if(t.includes(u))return t;const e=t.replace(/^\//,"");return`/${u}/${e}`},f=t=>t.includes(u)?t.replace(/^\//,"").substring(u.length):t;class $ extends h{init(){window.addEventListener("popstate",()=>{this.navigate({to:f(window.location.pathname)})}),this.navigate({to:f(window.location.pathname)})}push(e){window.history.pushState({},"",m(e))}replace(e){window.history.replaceState({},"",m(e))}}class L extends h{init(){window.addEventListener("hashchange",()=>{this.navigate({to:window.location.hash.slice(1)??"/"})});const e=window.location.hash.slice(1)??"/";this.navigate({to:e})}push(e){const r=window.location.href.replace(/(#.*)?$/,`#${e}`);window.location.replace(r)}replace(e){window.location.hash=`#${e}`}}const P=t=>function(e){const{meta:r}=e;return r!=null&&r.requiresAuth&&!t.isLoggedIn()?(e.redirect="/login",!1):r!=null&&r.guestOnly&&t.isLoggedIn()?(e.redirect="/",!1):!0},O=[{href:"/",label:"홈",id:"home"},{href:"/profile",label:"프로필",id:"profile"},{href:"/login",label:"로그인",id:"login"},{href:"#",label:"로그아웃",id:"logout"}],E=({id:t,isLoggedIn:e})=>t==="home"?!0:t==="profile"?e:t==="login"?!e:t==="logout"?e:!1,I=({isLoggedIn:t,currentPathname:e})=>`
+var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configurable:!0,writable:!0,value:r}):t[e]=r;var d=(t,e,r)=>v(t,typeof e!="symbol"?e+"":e,r);(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))n(s);new MutationObserver(s=>{for(const o of s)if(o.type==="childList")for(const l of o.addedNodes)l.tagName==="LINK"&&l.rel==="modulepreload"&&n(l)}).observe(document,{childList:!0,subtree:!0});function r(s){const o={};return s.integrity&&(o.integrity=s.integrity),s.referrerPolicy&&(o.referrerPolicy=s.referrerPolicy),s.crossOrigin==="use-credentials"?o.credentials="include":s.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function n(s){if(s.ep)return;s.ep=!0;const o=r(s);fetch(s.href,o)}})();const w=()=>{const t=new Set;return{subscribe:s=>{t.add(s)},unsubscribe:s=>{t.delete(s)},notify:s=>{t.forEach(o=>o(s))}}},y=t=>{let e=t;const r=w();return{...r,setState:o=>{e={...o},r.notify(e)},getState:()=>e}},i=(()=>{const t=y({user:JSON.parse(localStorage.getItem("user"))});return{...t,isLoggedIn:()=>{const{user:r}=t.getState();return!!r}}})(),x=function(){function t({component:e}){document.getElementById("root").innerHTML=e}return{render:t}}();class p{constructor(e=[]){d(this,"routes",{});d(this,"middlewares",[]);e.forEach(({path:r,component:n,meta:s})=>{this.routes[r]={component:n,meta:s}})}use(e){return this.middlewares.push(e),this}render(e){const r=(this.routes[e]??this.routes["/*"]).component();return x.render({component:r}),r}push(){}replace(){}navigate({to:e,replace:r=!1}){var s;const n={path:e,meta:(s=this.routes[e])==null?void 0:s.meta,redirect:null};for(const o of this.middlewares)if(o(n)===!1&&n.redirect)return this.replace(n.redirect),this.render(n.redirect);return r?this.replace(n.redirect):this.push(e),this.render(e)}}const c="front_5th_chapter1-1",m=t=>{if(t.includes(c))return t;const e=t.replace(/^\//,"");return`/${c}/${e}`},f=t=>t.includes(c)?t.replace(/^\//,"").substring(c.length):t;class S extends p{init(){window.addEventListener("popstate",()=>{this.navigate({to:f(window.location.pathname)})}),this.navigate({to:f(window.location.pathname)})}push(e){window.history.pushState({},"",m(e))}replace(e){window.history.replaceState({},"",m(e))}}class $ extends p{init(){window.addEventListener("hashchange",()=>{this.navigate({to:window.location.hash.slice(1)??"/"})});const e=window.location.hash.slice(1)??"/";this.navigate({to:e})}push(e){const r=window.location.href.replace(/(#.*)?$/,`#${e}`);window.location.replace(r)}replace(e){window.location.hash=`#${e}`}}const L=t=>function(e){const{meta:r}=e;return(e==null?void 0:e.path)!=="login"&&(r!=null&&r.requiresAuth)&&!t.isLoggedIn()?(e.redirect="/login",!1):(e==null?void 0:e.path)!=="/"&&(r!=null&&r.guestOnly)&&t.isLoggedIn()?(e.redirect="/",!1):!0},O=[{href:"/",label:"홈",id:"home"},{href:"/profile",label:"프로필",id:"profile"},{href:"/login",label:"로그인",id:"login"},{href:"#",label:"로그아웃",id:"logout"}],P=({id:t,isLoggedIn:e})=>t==="home"?!0:t==="profile"?e:t==="login"?!e:t==="logout"?e:!1,E=({isLoggedIn:t,currentPathname:e})=>`
   <nav class="bg-white shadow-md p-2 sticky top-14">
     <ul class="flex justify-around">
-      ${O.filter(({id:r})=>E({id:r,isLoggedIn:t})).map(({href:r,label:o,id:s})=>`
+      ${O.filter(({id:r})=>P({id:r,isLoggedIn:t})).map(({href:r,label:n,id:s})=>`
             <li>  
               <a
                 id="${s}"
                 href="${r}"
                 class="${e.endsWith(r)?"text-blue-600 font-bold":"text-gray-600"}">
-                ${o}
+                ${n}
               </a>
             </li>
           `).join("")}
     </ul>
   </nav>
-`,p=()=>`
+`,b=()=>`
   <header class="bg-blue-600 text-white p-4 sticky top-0">
     <h1 class="text-2xl font-bold">항해플러스</h1>
   </header>
-  ${I({isLoggedIn:i.isLoggedIn(),currentPathname:location.pathname})}
-`,b=()=>`
+  ${E({isLoggedIn:i.isLoggedIn(),currentPathname:location.pathname})}
+`,h=()=>`
   <footer class="bg-gray-200 p-4 text-center">
     <p>&copy; 2024 항해플러스. All rights reserved.</p>
   </footer>
-`,j=[{name:"홍길동",createdAt:"5분 전",contents:"오늘 날씨가 정말 좋네요. 다들 좋은 하루 보내세요!"},{name:"김철수",createdAt:"15분 전",contents:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{name:"이영희",createdAt:"30분 전",contents:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{name:"박민수",createdAt:"1시간 전",contents:"주말에 등산 가실 분 계신가요? 함께 가요!"},{name:"정수연",createdAt:"2시간 전",contents:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}],A=()=>`
+`,I=[{name:"홍길동",createdAt:"5분 전",contents:"오늘 날씨가 정말 좋네요. 다들 좋은 하루 보내세요!"},{name:"김철수",createdAt:"15분 전",contents:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{name:"이영희",createdAt:"30분 전",contents:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{name:"박민수",createdAt:"1시간 전",contents:"주말에 등산 가실 분 계신가요? 함께 가요!"},{name:"정수연",createdAt:"2시간 전",contents:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}],A=()=>`
   <div class="bg-gray-100 min-h-screen flex justify-center">
     <div class="max-w-md w-full">
-    ${p()}
+    ${b()}
       <main class="p-4">
         <div class="mb-4 bg-white rounded-lg shadow p-4">
           <textarea class="w-full p-2 border rounded" placeholder="무슨 생각을 하고 계신가요?"></textarea>
@@ -33,7 +33,7 @@ var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configura
         </div>
 
         <div class="space-y-4">
-          ${j.map(({name:t,createdAt:e,contents:r})=>`
+          ${I.map(({name:t,createdAt:e,contents:r})=>`
               <div class="bg-white rounded-lg shadow p-4">
                 <div class="flex items-center mb-2">
                   <img src="https://placehold.co/40" alt="프로필" class="rounded-full mr-2">
@@ -52,14 +52,14 @@ var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configura
             `).join("")}
         </div>
       </main>
-      ${b()}
+      ${h()}
     </div>
   </div>
-`;document.body.addEventListener("click",t=>{if(t.target.id==="logout"||t.target.closest("#logout")){t.preventDefault(),i.setState({user:null}),localStorage.removeItem("user"),d().navigate({to:"/login"});return}const e=t.target.closest("a");if(e){t.preventDefault();const r=e.href.replace(location.origin,"");d().navigate({to:r})}});const R=()=>{const{user:t}=i.getState();return`
+`;document.body.addEventListener("click",t=>{if(t.target.id==="logout"||t.target.closest("#logout")){t.preventDefault(),i.setState({user:null}),localStorage.removeItem("user"),u().navigate({to:"/login"});return}const e=t.target.closest("a");if(e){t.preventDefault();const r=e.href.replace(location.origin,"");u().navigate({to:r})}});const R=()=>{const{user:t}=i.getState();return`
     <div id="root">
       <div class="bg-gray-100 min-h-screen flex justify-center">
         <div class="max-w-md w-full">
-          ${p()}
+          ${b()}
           <main class="p-4">
             <div class="bg-white p-8 rounded-lg shadow-md">
               <h2 class="text-2xl font-bold text-center text-blue-600 mb-8">
@@ -116,11 +116,11 @@ var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configura
               </form>
             </div>
           </main>
-          ${b()}
+          ${h()}
         </div>
       </div>
     </div>
-  `};document.body.addEventListener("submit",t=>{if(t.preventDefault(),t.target.closest("form")&&location.pathname.endsWith("/profile")){const e=t.target,r=e.querySelector("#username").value,o=e.querySelector("#email").value,s=e.querySelector("#bio").value,n={username:r,email:o,bio:s};i.setState({user:n}),localStorage.setItem("user",JSON.stringify(n)),d().navigate({to:"/profile"})}});const q=()=>`
+  `};document.body.addEventListener("submit",t=>{if(t.preventDefault(),t.target.closest("form")&&location.pathname.endsWith("/profile")){const e=t.target,r=e.querySelector("#username").value,n=e.querySelector("#email").value,s=e.querySelector("#bio").value,o={username:r,email:n,bio:s};i.setState({user:o}),localStorage.setItem("user",JSON.stringify(o)),u().navigate({to:"/profile"})}});const j=()=>`
   <main class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
       <h1 class="text-2xl font-bold text-center text-blue-600 mb-8">항해플러스</h1>
@@ -145,7 +145,7 @@ var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configura
       </div>
     </div>
   </main>
-`;document.body.addEventListener("submit",t=>{if(t.preventDefault(),t.target.closest("form")&&location.pathname.endsWith("/login")){const e=t.target,r=e.querySelector("input[name='username']").value,o=e.querySelector("input[name='email']").value;if(!r)return;const s={username:r,email:o,bio:""};i.setState({user:s}),localStorage.setItem("user",JSON.stringify(s)),d().navigate({to:"/"})}});const M=()=>`
+`;document.body.addEventListener("submit",t=>{if(t.preventDefault(),t.target.closest("form")&&location.pathname.endsWith("/login")){const e=t.target,r=e.querySelector("input[name='username']").value,n=e.querySelector("input[name='email']").value;if(!r)return;const s={username:r,email:n,bio:""};i.setState({user:s}),localStorage.setItem("user",JSON.stringify(s)),u().navigate({to:"/"})}});const q=()=>`
   <main class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full text-center" style="max-width: 480px">
       <h1 class="text-2xl font-bold text-blue-600 mb-4">항해플러스</h1>
@@ -159,4 +159,4 @@ var g=Object.defineProperty;var v=(t,e,r)=>e in t?g(t,e,{enumerable:!0,configura
       </a>
     </div>
   </main>
-`;let a=null;const N=[{path:"/",component:A},{path:"/profile",component:R,meta:{requiresAuth:!0}},{path:"/login",component:q,meta:{guestOnly:!0}},{path:"/*",component:M}],B={history:$,hash:L},D=({type:t="history"})=>a||(a=new B[t](N),a.use(P(i)).init(),a),d=()=>{if(!a)throw new Error("Router is not initialized");return a};D({type:"history"});
+`;let a=null;const N=[{path:"/",component:A},{path:"/profile",component:R,meta:{requiresAuth:!0}},{path:"/login",component:j,meta:{guestOnly:!0}},{path:"/*",component:q}],M={history:S,hash:$},B=({type:t="history"})=>a||(a=new M[t](N),a.use(L(i)).init(),a),u=()=>{if(!a)throw new Error("Router is not initialized");return a};B({type:"history"});
