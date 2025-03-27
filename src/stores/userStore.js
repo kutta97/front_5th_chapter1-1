@@ -1,17 +1,20 @@
-import Store from "../utils/store.js";
+import createObservableStore from "../utils/store.js";
 
-class UserStore extends Store {
-  constructor(initialState) {
-    super(initialState);
-  }
+const userStore = (() => {
+  const store = createObservableStore({
+    user: JSON.parse(localStorage.getItem("user")),
+  });
 
-  isLoggedIn() {
-    return Boolean(this.state.user);
-  }
-}
+  const isLoggedIn = () => {
+    const { user } = store.getState();
 
-const userStore = new UserStore({
-  user: JSON.parse(localStorage.getItem("user")),
-});
+    return Boolean(user);
+  };
+
+  return {
+    ...store,
+    isLoggedIn,
+  };
+})();
 
 export default userStore;

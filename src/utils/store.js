@@ -1,35 +1,23 @@
-class Subject {
-  constructor() {
-    this.observers = new Set();
-  }
+import createObservable from "./observable.js";
 
-  subscribe(observer) {
-    this.observers.add(observer);
-  }
+const createObservableStore = (initialState) => {
+  let state = initialState;
+  const observable = createObservable();
 
-  unsubscribe(observer) {
-    this.observers.delete(observer);
-  }
+  const setState = (newState) => {
+    state = { ...newState };
+    observable.notify(state);
+  };
 
-  notify(data) {
-    this.observers.forEach((observer) => observer(data));
-  }
-}
+  const getState = () => {
+    return state;
+  };
 
-class Store extends Subject {
-  constructor(initialState) {
-    super();
-    this.state = initialState;
-  }
+  return {
+    ...observable,
+    setState,
+    getState,
+  };
+};
 
-  setState(newState) {
-    this.state = { ...this.state, ...newState };
-    this.notify(this.state);
-  }
-
-  getState() {
-    return this.state;
-  }
-}
-
-export default Store;
+export default createObservableStore;
