@@ -2,13 +2,11 @@ import Renderer from "../utils/renderer.js";
 
 class RouterInterface {
   routes = {};
-  routesMeta = {};
   middlewares = [];
 
   constructor(routes = []) {
     routes.forEach(({ path, component, meta }) => {
-      this.routes[path] = component;
-      this.routesMeta[path] = meta;
+      this.routes[path] = { component, meta };
     });
   }
 
@@ -18,7 +16,7 @@ class RouterInterface {
   }
 
   render(path) {
-    const component = (this.routes[path] ?? this.routes["/*"])();
+    const component = (this.routes[path] ?? this.routes["/*"]).component();
     Renderer.render({ component });
 
     return component;
@@ -30,7 +28,8 @@ class RouterInterface {
 
   navigate({ to: path, replace = false }) {
     const context = {
-      meta: this.routesMeta[path],
+      path,
+      meta: this.routes[path]?.meta,
       redirect: null,
     };
 
